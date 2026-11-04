@@ -1,0 +1,117 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --eye: #3fc2ee; }
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; }
+  #faceWrap { width: min(94vw, 80vh); aspect-ratio: 445 / 380; transition: filter .3s; }
+  svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  .ring { fill: var(--eye); }
+  .eye { transform-box: fill-box; transform-origin: center; animation: blink 5s infinite; }
+  @keyframes blink { 0%,93%,100% { transform: scaleY(1); } 96% { transform: scaleY(.08); } }
+  .iris { animation: glance 9s ease-in-out infinite; }
+  @keyframes glance {
+    0%,100% { transform: translate(0,0); } 20% { transform: translate(4px,-2px); }
+    45% { transform: translate(-4px,1px); } 70% { transform: translate(3px,3px); } }
+  .brow { transform-box: fill-box; transform-origin: center; transition: transform .3s; }
+  .mouth { transform-box: fill-box; transform-origin: 50% 0%; transition: transform .2s; }
+
+  body.listening #faceWrap { filter: drop-shadow(0 0 22px rgba(63,194,238,.7)); }
+  body.listening .brow { transform: translateY(-8px); }
+
+  body.thinking .iris { animation: lookside 1.4s ease-in-out infinite; }
+  @keyframes lookside { 0%,100% { transform: translateX(-6px); } 50% { transform: translateX(6px); } }
+  body.thinking #browR { transform: translateY(-9px) rotate(-8deg); }
+  body.thinking .mouth { transform: scale(.6,.7); }
+
+  body.speaking .mouth { animation: talk .36s ease-in-out infinite; }
+  @keyframes talk { 0%,100% { transform: scale(1,.5); } 50% { transform: scale(1.08,1.7); } }
+  body.speaking .brow { transform: translateY(-3px); }
+
+  body.confirming { --eye: #ffb020; }
+  body.confirming #faceWrap { filter: drop-shadow(0 0 22px rgba(255,176,32,.7)); }
+
+  
+</style></head>
+<body class="idle">
+<div id="faceWrap">
+<svg id="face" viewBox="0 0 445 380" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="helm" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c9ced9"/>
+        </linearGradient>
+        <linearGradient id="visor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#f1f3f8"/>
+          <stop offset="1" stop-color="#bcc3d0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ears -->
+      <rect x="6" y="172" width="38" height="66" rx="18" fill="#394259" stroke="#1c2233" stroke-width="4"/>
+      <rect x="401" y="172" width="38" height="66" rx="18" fill="#394259" stroke="#1c2233" stroke-width="4"/>
+
+      <!-- helmet -->
+      <path d="M222 10 C334 10 424 68 426 190 C428 296 372 356 222 356 C72 356 16 296 18 190 C20 68 110 10 222 10 Z"
+            fill="url(#helm)" stroke="#1c2233" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M150 30 Q222 6 296 30 L286 46 Q222 34 160 46 Z" fill="#fbb85c" stroke="#1c2233" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M70 100 Q222 58 376 100" fill="none" stroke="#1c2233" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- visor -->
+      <path d="M92 112 Q222 78 352 112 Q392 130 390 215 Q384 318 222 322 Q60 318 54 215 Q52 130 92 112 Z"
+            fill="url(#visor)" stroke="#1c2233" stroke-width="11" stroke-linejoin="round"/>
+
+      <!-- eyebrows -->
+      <path id="browL" class="brow" d="M116 148 Q142 134 170 146" fill="none" stroke="#1c2233" stroke-width="5" stroke-linecap="round"/>
+      <path id="browR" class="brow" d="M274 146 Q302 134 328 148" fill="none" stroke="#1c2233" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- left eye -->
+      <g transform="translate(139 222)"><g class="eye">
+        <circle r="57" fill="#1c2233"/>
+        <circle r="51" class="ring"/>
+        <g class="iris">
+          <circle r="44" cy="-4" fill="#1c2233"/>
+          <path d="M-34 14 Q0 42 34 14 Q30 36 0 40 Q-30 36 -34 14 Z" class="ring"/>
+          <circle cx="-25" cy="-20" r="8.5" fill="#fdd9a0"/>
+          <circle cx="-37" cy="-4" r="3.6" fill="#fdb99f"/>
+          <circle cx="-34" cy="6" r="2.6" fill="#fdb99f"/>
+          <circle cx="36" cy="2" r="2.6" class="ring"/>
+          <circle cx="32" cy="11" r="2.2" class="ring"/>
+        </g>
+      </g></g>
+
+      <!-- right eye -->
+      <g transform="translate(305 222)"><g class="eye">
+        <circle r="57" fill="#1c2233"/>
+        <circle r="51" class="ring"/>
+        <g class="iris">
+          <circle r="44" cy="-4" fill="#1c2233"/>
+          <path d="M-34 14 Q0 42 34 14 Q30 36 0 40 Q-30 36 -34 14 Z" class="ring"/>
+          <circle cx="-25" cy="-20" r="8.5" fill="#fdd9a0"/>
+          <circle cx="-37" cy="-4" r="3.6" fill="#fdb99f"/>
+          <circle cx="-34" cy="6" r="2.6" fill="#fdb99f"/>
+          <circle cx="36" cy="2" r="2.6" class="ring"/>
+          <circle cx="32" cy="11" r="2.2" class="ring"/>
+        </g>
+      </g></g>
+
+      <!-- nose dots -->
+      <circle cx="212" cy="283" r="4.5" fill="#e9a0a4"/>
+      <circle cx="237" cy="283" r="4.5" fill="#e9a0a4"/>
+
+      <!-- mouth -->
+      <g class="mouth">
+        <path d="M203 300 Q226 295 249 300 Q244 327 226 327 Q208 327 203 300 Z"
+              fill="#e8807f" stroke="#1c2233" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="226" cy="319" rx="9" ry="5" fill="#d85f67"/>
+      </g>
+    </svg>
+</div>
+<script>
+  let mode = "idle", confirming = false;
+  function render() { document.body.className = mode + (confirming ? " confirming" : ""); }
+  function setMode(m) { mode = m; render(); }
+  function setConfirm(b) { confirming = b; render(); }
+</script>
+</body></html>
